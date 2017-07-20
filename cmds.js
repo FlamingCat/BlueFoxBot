@@ -11,6 +11,7 @@ client.on('ready',() => {
 var prefix = "+"
 client.on('message', message => {
 	if (message.author === client.user) return;
+	if (message.author.id.match("281178537841524736")) return;
 	if (message.content.startsWith(prefix + 'fc')) {
 		message.channel.sendMessage('1736-3622-5725');
 	}
