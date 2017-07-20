@@ -2,7 +2,9 @@ const Discord = require("discord.js");
 const bot = new Discord.Client();
 
 bot.on('ready', () => {
+  console.log('My body is Reggie');
   console.log(`Connected as ${bot.user.tag}.`);
+    client.user.setGame('Foxin around')
 });
 bot.on('disconnect', () => {
   console.log('Disconnected.')
