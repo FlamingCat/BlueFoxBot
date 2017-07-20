@@ -26,4 +26,4 @@ bot.on('message', message => {
   }
 });
 
-bot.login(blueconfig.token);
+bot.login(config.token);
