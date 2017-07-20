@@ -4,6 +4,8 @@ const config = require('./config.json')
 const bot = new Discord.Client();
 
 bot.on('ready', () => {
+  console.log('My body is Reggie');
+	bot.user.setGame('Foxin around')
   console.log(`Connected as ${bot.user.tag}.`);
 });
 bot.on('disconnect', () => {
@@ -26,4 +28,4 @@ bot.on('message', message => {
   }
 });
 
-bot.login('MzM3NTk2NTM5NzUwOTczNDQx.DFJKyw.ll_PtD4U8wiFEizTnAglc_Qahuw');
+bot.login(config.token);
