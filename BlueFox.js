@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
+const fs = require("fs");
+const config = require('./config.json')
 const bot = new Discord.Client();
 
 bot.on('ready', () => {
-  console.log('My body is Reggie');
   console.log(`Connected as ${bot.user.tag}.`);
-  bot.user.setGame('Foxin around')
 });
 bot.on('disconnect', () => {
   console.log('Disconnected.')
@@ -26,4 +26,4 @@ bot.on('message', message => {
   }
 });
 
-bot.login(config.token);
+bot.login('MzM3NTk2NTM5NzUwOTczNDQx.DFJKyw.ll_PtD4U8wiFEizTnAglc_Qahuw');
