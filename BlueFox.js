@@ -26,4 +26,4 @@ bot.on('message', message => {
   }
 });
 
-bot.login('MzM3NTk2NTM5NzUwOTczNDQx.DFJKyw.ll_PtD4U8wiFEizTnAglc_Qahuw');
+bot.login(blueconfig.token);
