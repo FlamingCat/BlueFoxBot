@@ -56,7 +56,7 @@ client.on('message', message => {
 		}
 		else if (person) {
 			if (data[person.id] == undefined || data[person.id].steamaccount == undefined) {
-				message.channel.send('${person} hasn\'t registered himself in the database yet.')
+				message.channel.send(`${person} hasn\'t registered himself in the database yet.`)
 				return;
 			}
 			message.channel.send("http://steamcommunity.com/profiles/" + data[person.id].steamaccount + "/")
