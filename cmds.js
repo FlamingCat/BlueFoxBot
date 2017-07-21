@@ -47,7 +47,7 @@ client.on('message', message => {
 	}
 	if (message.content.startsWith(prefix + "steam")) {
 		if (!person && message.content.split(" ")[1] == (undefined || null)) {
-			message.channel.send("Usage:\n+steam (steamid)\nAdds Your steam ID to the bot so others can see it with +steam @YourName\nYou can find your ID if you go to your steam profile and copy the numbers that show up after /profile\n\nshould you instead see something like id/BenCat08 and not numbers, enter that name after /id into this website to find your steamid:\nhttp://http://steamidfinder.com")
+			message.channel.send("Usage:\n+steam (steamid)\nAdds Your steam ID to the bot so others can see it with +steam @YourName\nYou can find your ID if you go to your steam profile and copy the numbers that show up after /profile\n\nshould you instead see something like id/BenCat08 and not numbers, enter that name after /id into this website to find your steamid:\nhttp://steamidfinder.com")
 		}
 		else if (!person) {	
 			data[userID].steamaccount = message.content.split(" ")[1]
