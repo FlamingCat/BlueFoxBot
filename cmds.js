@@ -55,7 +55,7 @@ client.on('message', message => {
 			message.channel.send("Your new Steamid is now " + data[userID].steamaccount)
 		}
 		else if (person) {
-			if (data[person.id] == undefined || data[person.id].steamaccount == undefined) {
+			if (data[person.id] == undefined || data[person.id].steamaccount == undefined || data[person.id].steamaccount == "") {
 				message.channel.send(`${person} hasn\'t registered himself in the database yet.`)
 				return;
 			}
