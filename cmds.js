@@ -49,12 +49,16 @@ client.on('message', message => {
 		if (!person && message.content.split(" ")[1] == (undefined || null)) {
 			message.channel.send("Usage:\n+steam (steamid)\nAdds Your steam ID to the bot so others can see it with +steam @YourName")
 		}
-		else if (!person) {
+		else if (!person) {	
 			data[userID].steamaccount = message.content.split(" ")[1]
 			saveData();
 			message.channel.send("Your new Steamid is now " + data[userID].steamaccount)
 		}
 		else if (person) {
+			if (data[person.id] == undefined || data[person.id].steamaccount == undefined) {
+				message.channel.send('${person} hasn\'t registered himself in the database yet.')
+				return;
+			}
 			message.channel.send("http://steamcommunity.com/profiles/" + data[person.id].steamaccount + "/")
 		}
 	}
