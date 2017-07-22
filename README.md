@@ -8,6 +8,7 @@ Much more!
 # Credits 
 
 BenCat07
+
 flamerds
 
 (Currently this bot is in beta more things to be added soon)
