@@ -67,7 +67,7 @@ client.on('message', message => {
 	let command2 = message.content.split(" ")[1];
 	let command3 = message.content.split(" ")[2];
 	let command4 = message.content.split(" ")[3];
-
+	if (message.mentions.everyone.valueOf() == 1) return;
 	if(!command1 == undefined) {
 		command1 = command1.toLowerCase()
 	}
