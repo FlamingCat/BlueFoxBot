@@ -62,8 +62,8 @@ client.on('message', message => {
 			message.channel.send("http://steamcommunity.com/profiles/" + data[person.id].steamaccount + "/")
 		}
 	}
-	//Hello, i am BlueFoxBot!
-	let command1 = message.content.split(" ")[0];
+	 //Hello, i am BlueFoxBot!
+	/*let command1 = message.content.split(" ")[0];
 	let command2 = message.content.split(" ")[1];
 	let command3 = message.content.split(" ")[2];
 	let command4 = message.content.split(" ")[3];
@@ -91,7 +91,7 @@ client.on('message', message => {
 			return;
 		}
 		message.channel.send("Hello " + command2 + " " + command3 + " " + command4 + ", i am BlueFoxBot!")
-	}	
+	}*/
 });
 
 client.login(config.token); 
