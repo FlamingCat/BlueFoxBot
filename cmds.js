@@ -42,6 +42,10 @@ client.on('message', message => {
     	data[userID].steamaccount = "";
     	saveData();
   	}
+	  if (!data[userID].reddit) {
+    	data[userID].reddit = "";
+    	saveData();
+  	}
 	if (message.content.startsWith(prefix + 'fc')) {
 		message.channel.sendMessage('1736-3622-5725');
 	}
@@ -60,6 +64,23 @@ client.on('message', message => {
 				return;
 			}
 			message.channel.send("http://steamcommunity.com/profiles/" + data[person.id].steamaccount + "/")
+		}
+	}
+	if (message.content.startsWith(prefix + "reddit")) {
+		if (!person && message.content.split(" ")[1] == (undefined || null)) {
+			message.channel.send("Usage:\n+reddit (reddit username)\nAdds Your reddit account to the bot so others can see it with +reddit @YourName")
+		}
+		else if (!person) {	
+			data[userID].reddit = message.content.split(" ")[1]
+			saveData();
+			message.channel.send("Your new Reddit Account is now " + data[userID].reddit)
+		}
+		else if (person) {
+			if (data[person.id] == undefined || data[person.id].reddit == undefined || data[person.id].reddit == "") {
+				message.channel.send(`${person} hasn\'t registered himself in the database yet.`)
+				return;
+			}
+			message.channel.send("https://www.reddit.com/user/" + data[person.id].reddit + "/")
 		}
 	}
 	 //Hello, i am BlueFoxBot!
