@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
 const fs = require("fs");
-const config = require('./config.json')
+const config = require("./config.json")
 const base = require("./guilds/base.json");
+const gbase = require("./guilds/gbase.json");
 const client = new Discord.Client();
 let data
 // Data
@@ -18,9 +19,28 @@ fs.readFile("./guilds/data.json", (err, content) => {
       }
     }
 });
+let guild
+//Guild
+fs.readFile("./guilds/guild.json", (err, content) => {
+  if(err) {
+    console.log("error when reading guild.json:\n" + err);
+    process.exit(1);
+  } else {
+      try {
+        guild = JSON.parse(content);
+      } catch (e) {
+          console.log("error when parsing guild.json:\n" + e);
+          process.exit(1);
+      }
+    }
+});
 // Data
 let saveData = () => {
     fs.writeFile("./guilds/data.json", JSON.stringify(data), (a) => {(a) ? console.log("error writing save to data.json:\n" + a) : ""})
+};
+//Guild
+let saveGuild = () => {
+    fs.writeFile("./guilds/guild.json", JSON.stringify(guild), (a) => {(a) ? console.log("error writing save to guild.json:\n" + a) : ""})
 };
 client.on('ready',() => {
 	console.log('My body is Reggie');
@@ -38,16 +58,56 @@ client.on('message', message => {
     	data[userID] = Object.assign({}, base);
     	saveData();
   	}
+	if (!guild[guildID]) {
+    	guild[guildID] = Object.assign({}, gbase);
+    	saveData();
+  	}
 	if (!data[userID].steamaccount) {
     	data[userID].steamaccount = "";
     	saveData();
   	}
-	  if (!data[userID].reddit) {
+	if (!data[userID].reddit) {
     	data[userID].reddit = "";
     	saveData();
   	}
 	if (message.content.startsWith(prefix + 'fc')) {
 		message.channel.sendMessage('1736-3622-5725');
+	}
+	if (message.content.startsWith(prefix + "modrole")) {
+		if (message.content.split(" ")[1] == undefined) {
+			message.channel.send("Usage:\n +modrole (name of your moderator_role)\n\nGives The chosen role the rights to some specific commands, like settign the welcome channel, etc.")
+			return;
+		}
+		else {
+			if (message.author == message.guild.owner || message.author.id.match("257583488155385856")) {
+				guild[guildID].admin_role = message.content.split(" ")[1];
+				saveGuild();
+				message.channel.send("Successfully set the moderator role to " + message.content.split(" ")[1] + ".")
+				return;
+			}
+			else {
+				message.channel.send("only a owner may do this.")
+				return;
+			}
+		}
+	}
+	if (message.content.startsWith(prefix + "welcome")) {
+		if (message.content.split(" ")[1] == undefined) {
+			message.channel.send("Usage:\n+welcome (channel)\n\nSets a channel where all join and leave messages will be posted.")
+			return;
+		}
+		else {
+			if (!message.member.roles.exists("name", guild[guildID].admin_role)) {
+				message.channel.send("only a Moderator May use this command.")
+				return;
+			}
+			else {
+				guild[guildID].welcomechannel = message.content.split(" ")[1]
+				message.channel.send("you new Welcome channel has been set to " + message.content.split(" ")[1])
+				saveGuild();
+				return;
+			}
+		}
 	}
 	if (message.content.startsWith(prefix + "steam")) {
 		if (!person && message.content.split(" ")[1] == (undefined || null)) {
@@ -114,5 +174,18 @@ client.on('message', message => {
 		message.channel.send("Hello " + command2 + " " + command3 + " " + command4 + ", i am BlueFoxBot!")
 	}*/
 });
-
+client.on("GuildMemberAdd", member => {
+	const guild = member.guild
+	const guildID = member.guild.id
+	if (guild[guildID].welcomechannel == "" || guild[guildID].welcomechannel == undefined) return;
+	welcome = member.guild.channel.get(guild[guildID].welcomechannel)
+	welcome.send("Welcome to this server, " + member + "!")
+})
+client.on("GuildMemberRemove", member => {
+	const guild = member.guild
+	const guildID = member.guild.id
+	if (guild[guildID].welcomechannel == "" || guild[guildID].welcomechannel == undefined) return;
+	welcome = member.guild.channel.find("name", guild[guildID].welcomechannel)
+	welcome.send("Goodbye " + member + " 😢")
+})
 client.login(config.token); 
