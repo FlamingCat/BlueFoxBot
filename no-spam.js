@@ -49,7 +49,7 @@ bot.on('message', message => {
     data[userID].msgs++
     setTimeout(() => {
         data[userID].msgs--
-    }, 3000)
+    }, 5000)
     if (data[userID].msgs >= 5 && data[userID].msgs <= 7) {
         message.channel.send(`Please calm down,you're sending too many messages, send ${10 - data[userID].msgs} more and you'll be kicked`)
     }
