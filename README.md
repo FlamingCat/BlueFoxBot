@@ -11,4 +11,4 @@ BenCat07
 
 flamerds
 
-(Currently this bot is in beta more things to be added soon)
+Retrosol (Request Bot, thanks dude)
