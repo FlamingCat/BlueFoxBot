@@ -6,7 +6,7 @@ const bot = new Discord.Client();
 bot.on('ready', () => {
   console.log('My body is Reggie');
 	bot.user.setGame('Foxin around')
-  console.log(`Connected as ${bot.user.tag}.`);
+  console.log(`Connected as ${bot.user.username}.`);
 });
 bot.on('disconnect', () => {
   console.log('Disconnected.')
@@ -23,6 +23,13 @@ bot.on('message', message => {
   var Command = message.content
   Command = Command.toLowerCase().split("+");
   Command = Command.join("")
+  if (Command === 'help') {
+    message.channel.send("```+reddit\nAdd your reddit profile to the databse, can be seen with +reddit (Ping)\n\n+steam\nAdd your Steam profile to the databasem can be seen with +steam (ping)\n\n+avy\nSends The link to your discord AVY```")
+  }
+  if (Command === 'avy') {
+    // Send the user's avatar URL
+    message.channel.send(message.author.avatarURL);
+  }
   if (Command === "lol") {
     message.channel.send("lul")
   }
